@@ -1,4 +1,4 @@
-function Map() {
+const Map = () => {
   return (
     <div>
       Map

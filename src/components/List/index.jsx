@@ -1,4 +1,4 @@
-function List() {
+const List = () => {
   return (
     <div>
       List

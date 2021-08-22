@@ -1,4 +1,4 @@
-function PlaceDetails() {
+const PlaceDetails = () => {
   return (
     <div>
       PlaceDetails
