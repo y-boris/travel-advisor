@@ -19,12 +19,12 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(coords, bounds)
+    // console.log(coords, bounds)
 
     // getPlacesData()
     getPlacesData(bounds.sw, bounds.ne)
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setPlaces(data)
       })
   }, [coords, bounds])
