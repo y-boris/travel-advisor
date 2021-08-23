@@ -1,6 +1,6 @@
 # Travel Advisor
 
-![68747470733a2f2f692e6962622e636f2f71706832635a6e2f696d6167652e706e6767](https://user-images.githubusercontent.com/68222437/130494468-3b5f4457-ae41-4e84-859f-6962d944e1aa.png)
+![Screenshot 2021-08-23 at 23 20 52](https://user-images.githubusercontent.com/68222437/130517355-6860ac4e-e1ea-441f-a9a1-ddf7cf2c54fc.png)
 
 ### Features
 
