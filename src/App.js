@@ -7,17 +7,20 @@ import List from './components/List'
 import Map from './components/Map'
 
 const App = () => {
-  const [places, setPlaces] = useState([])
-  const [childClicked, setChildClicked] = useState(null)
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
 
   const [coords, setCoords] = useState()
   const [bounds, setBounds] = useState(null)
 
+  const [places, setPlaces] = useState([])
+
+  const [childClicked, setChildClicked] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude} }) => {
-      setCoords ({ lat: latitude, lng: longitude })
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      setCoords({ lat: latitude, lng: longitude });
     });
   }, []);
 
@@ -29,7 +32,7 @@ const App = () => {
         setPlaces(data)
         setIsLoading(false)
       })
-  }, [coords, bounds])
+  }, [type, bounds])
 
   return (
     <>
@@ -41,9 +44,11 @@ const App = () => {
             places={places}
             childClicked={childClicked}
             isLoading={isLoading}
+            type={type}
+            setType={setType}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Map
             setCoords={setCoords}
             setBounds={setBounds}

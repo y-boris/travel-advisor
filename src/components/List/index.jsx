@@ -4,21 +4,18 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import PlaceDetails from '../PlaceDetails'
 import useStyles from './styles.js'
 
-const List = ({ places, childClicked, isLoading }) => {
+const List = ({ places, type, setType, rating, setRating, childClicked, isLoading }) => {
   const classes = useStyles();
-  const [type, setType] = useState('restaurants')
-  const [rating, setRating] = useState('0')
   const [elRefs, setElRefs] = useState([])
 
   useEffect(() => {
-    const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef())
-
-    setElRefs(refs)
+    setElRefs((refs) => Array(places?.length).fill().map((_, i) => refs[i] || createRef()));
   }, [places])
 
   return (
     <div className={classes.container}>
       <Typography variant="h4">
+        {/* Food & Dining around you */}
         Restaurants, Hotels, Attractions around you
       </Typography>
 
@@ -57,7 +54,7 @@ const List = ({ places, childClicked, isLoading }) => {
 
           <Grid container spacing={3} className={classes.list}>
             {places?.map((place, i) => (
-              <Grid item key={i} xs={12}>
+              <Grid ref={elRefs[i]} item key={i} xs={12}>
                 <PlaceDetails
                   place={place}
                   selected={Number(childClicked) === i}
