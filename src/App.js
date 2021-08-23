@@ -10,7 +10,7 @@ const App = () => {
   const [type, setType] = useState('restaurants')
   const [rating, setRating] = useState('')
 
-  const [coords, setCoords] = useState()
+  const [coords, setCoords] = useState({})
   const [bounds, setBounds] = useState(null)
 
   const [weatherData, setWeatherData] = useState([]);
@@ -38,14 +38,16 @@ const App = () => {
       setIsLoading(true)
 
       getWeatherData(coords.lat, coords.lng)
-      .then((data) => setWeatherData(data))
+        .then((data) => setWeatherData(data))
 
-      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0))
-        setRating('')
-        setFilteredPlaces([])
-        setIsLoading(false)
-      })
+      getPlacesData(type, bounds.sw, bounds.ne)
+        .then((data) => {
+          setPlaces(data?.filter((place) => place.name && place.num_reviews > 0))
+          setRating('')
+          setFilteredPlaces([])
+          setIsLoading(false)
+        }
+      )
     }
   }, [bounds, type])
 
@@ -67,7 +69,7 @@ const App = () => {
           <List
             isLoading={isLoading}
             childClicked={childClicked}
-            places={filteredPlaces.length ? filteredPlaces: places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             type={type}
             setType={setType}
             rating={rating}
@@ -80,7 +82,7 @@ const App = () => {
             setBounds={setBounds}
             coords={coords}
             setCoords={setCoords}
-            places={filteredPlaces.length ? filteredPlaces: places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             weatherData={weatherData}
           />
         </Grid>
