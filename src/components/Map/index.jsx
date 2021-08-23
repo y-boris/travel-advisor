@@ -6,9 +6,9 @@ import Rating from '@material-ui/lab/Rating'
 import useStyles from './styles'
 import mapStyles from '../../mapStyles'
 
-const Map = ({ setCoords, setBounds, coords }) => {
+const Map = ({ coords, places, setCoords, setBounds }) => {
   const classes = useStyles()
-  // const isMobile = useMediaQuery('(min-width:600px)')
+  const isMobile = useMediaQuery('(min-width:600px)')
 
   return (
     <div className={classes.mapContainer}>
@@ -26,6 +26,30 @@ const Map = ({ setCoords, setBounds, coords }) => {
         }}
         onChildClick={''}
       >
+        {places?.map((place, i) => (
+          <div
+            className={classes.markerContainer}
+            key={i}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
+          >
+            {!isMobile ? (
+              <LocationOnOutlinedIcon color="primary" fontSize="large" />
+            ) : (
+              <Paper elevation={3} className={classes.paper}>
+                <Typography className={classes.Typography} variant="subtitle2" glutterBottom>
+                  {place.name}
+                </Typography>
+                <img
+                  classname={classes.pointer}
+                  src={place.photo ? place.photo.images.large.url : '/images/Restaurant-Placeholder.jpg'}
+                  alt={place.name}
+                />
+                <Rating size="small" value={Number(place.rating)} readOnly />
+              </Paper>
+            )}
+          </div>
+        ))}
       </GoogleMapReact>
     </div>
   )
