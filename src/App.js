@@ -25,14 +25,16 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true)
+    if (bounds) {
+      setIsLoading(true)
 
-    getPlacesData(bounds.sw, bounds.ne)
-      .then((data) => {
+      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         setPlaces(data)
+        setRating('')
         setIsLoading(false)
       })
-  }, [type, bounds])
+    }
+  }, [bounds, type])
 
   return (
     <>
