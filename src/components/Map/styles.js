@@ -9,7 +9,7 @@ export default makeStyles(() => ({
     width: '100px',
   },
   mapContainer: {
-    height: '85vh',
+    height: 'calc(100vh - 65px)',
     width: '100%',
   },
   markerContainer: {

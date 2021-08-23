@@ -40,7 +40,8 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked, weatherDat
                   {place.name}
                 </Typography>
                 <img
-                  classname={classes.pointer}
+                  className={classes.pointer}
+                  height="50"
                   src={place.photo ? place.photo.images.large.url : '/images/Restaurant-Placeholder.jpg'}
                   alt={place.name}
                 />

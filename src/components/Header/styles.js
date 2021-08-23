@@ -3,6 +3,13 @@ import { alpha, makeStyles } from '@material-ui/core/styles'
 export default makeStyles((theme) => ({
   title: {
     display: 'none',
+    fontWeight: 'bold',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+  subTitle: {
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
