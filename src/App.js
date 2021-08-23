@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core'
 
-import { getPlacesData } from './api'
+import { getPlacesData, getWeatherData } from './api'
 import Header from './components/Header'
 import List from './components/List'
 import Map from './components/Map'
 
 const App = () => {
-  const [type, setType] = useState('restaurants');
-  const [rating, setRating] = useState('');
+  const [type, setType] = useState('restaurants')
+  const [rating, setRating] = useState('')
 
   const [coords, setCoords] = useState()
   const [bounds, setBounds] = useState(null)
 
-  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [weatherData, setWeatherData] = useState([]);
+  const [filteredPlaces, setFilteredPlaces] = useState([])
   const [places, setPlaces] = useState([])
 
   const [autocomplete, setAutocomplete] = useState(null)
@@ -23,18 +24,21 @@ const App = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
       setCoords({ lat: latitude, lng: longitude })
-    });
-  }, []);
+    })
+  }, [])
 
   useEffect(() => {
     const filtered = places.filter((place) => Number(place.rating) > rating)
 
-    setFilteredPlaces(filtered);
-  }, [rating]);
+    setFilteredPlaces(filtered)
+  }, [rating])
 
   useEffect(() => {
     if (bounds) {
       setIsLoading(true)
+
+      getWeatherData(coords.lat, coords.lng)
+      .then((data) => setWeatherData(data))
 
       getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         setPlaces(data?.filter((place) => place.name && place.num_reviews > 0))
@@ -77,11 +81,12 @@ const App = () => {
             coords={coords}
             setCoords={setCoords}
             places={filteredPlaces.length ? filteredPlaces: places}
+            weatherData={weatherData}
           />
         </Grid>
       </Grid>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
